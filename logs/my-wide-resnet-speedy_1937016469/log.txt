@@ -1,0 +1,204 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  init_value : 10
+  randomcrop : 4
+  batchSize : 128
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.05
+  model : "my-wide-resnet-speedy"
+  save : "logs/my-wide-resnet-speedy_1937016469"
+  dampening : 0
+  learningRateDecayRatio : 1
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 10
+  weightDecay : 0.0005
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar10_whitened.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+==> loading data	
+==> configuring model	
+forward output	{
+  1 : CudaTensor - size: 1x10
+}
+backward output	{
+  1 : CudaTensor - size: 1x3x32x32
+}
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+  (1): cudnn.SpatialConvolution(3 -> 24, 3x3, 1,1, 1,1) without bias
+  (2): nn.Sequential {
+    [input -> (1) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> (3) -> (4) -> output]
+      (1): cudnn.SpatialBatchNormalization
+      (2): cudnn.ReLU
+      (3): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> output]
+          |      (1): cudnn.SpatialConvolution(24 -> 32, 3x3, 1,1, 1,1) without bias
+          |      (2): cudnn.SpatialBatchNormalization
+          |      (3): cudnn.ReLU
+          |      (4): cudnn.SpatialConvolution(32 -> 32, 3x3, 1,1, 1,1) without bias
+          |    }
+          |`-> (2): cudnn.SpatialConvolution(24 -> 32, 1x1) without bias
+           ... -> output
+      }
+      (4): nn.CAddTable
+    }
+  }
+  (3): nn.Sequential {
+    [input -> (1) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> (3) -> (4) -> output]
+      (1): cudnn.SpatialBatchNormalization
+      (2): cudnn.ReLU
+      (3): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> output]
+          |      (1): cudnn.SpatialConvolution(32 -> 64, 3x3, 2,2, 1,1) without bias
+          |      (2): cudnn.SpatialBatchNormalization
+          |      (3): cudnn.ReLU
+          |      (4): cudnn.SpatialConvolution(64 -> 64, 3x3, 1,1, 1,1) without bias
+          |    }
+          |`-> (2): cudnn.SpatialConvolution(32 -> 64, 1x1, 2,2) without bias
+           ... -> output
+      }
+      (4): nn.CAddTable
+    }
+  }
+  (4): nn.Sequential {
+    [input -> (1) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> (3) -> (4) -> output]
+      (1): cudnn.SpatialBatchNormalization
+      (2): cudnn.ReLU
+      (3): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> output]
+          |      (1): cudnn.SpatialConvolution(64 -> 128, 3x3, 2,2, 1,1) without bias
+          |      (2): cudnn.SpatialBatchNormalization
+          |      (3): cudnn.ReLU
+          |      (4): cudnn.SpatialConvolution(128 -> 128, 3x3, 1,1, 1,1) without bias
+          |    }
+          |`-> (2): cudnn.SpatialConvolution(64 -> 128, 1x1, 2,2) without bias
+           ... -> output
+      }
+      (4): nn.CAddTable
+    }
+  }
+  (5): cudnn.SpatialBatchNormalization
+  (6): cudnn.ReLU
+  (7): cudnn.SpatialAveragePooling(8x8, 1,1)
+  (8): nn.View(128)
+  (9): nn.Linear(128 -> 10)
+}
+Network has	10	convolutions	
+Will save at logs/my-wide-resnet-speedy_1937016469	
+==> online epoch # 1 [batchSize = 128]	
+{
+  epoch : 1
+  test_acc : 45.17
+  loss : 1.5597534522032
+  train_acc : 42.582131410256
+  lr : 0.05
+  train_time : 18.980719089508
+  test_time : 1.1255221366882
+  n_parameters : 306066
+  train_loss : 1.5597534522032
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 10
+  init_value : 10
+  randomcrop : 4
+  batchSize : 128
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.05
+  model : "my-wide-resnet-speedy"
+  save : "logs/my-wide-resnet-speedy_1937016469"
+  dampening : 0
+  learningRateDecayRatio : 1
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 10
+  weightDecay : 0.0005
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar10_whitened.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.05,"randomcrop":4,"batchSize":128,"data_type":"torch.CudaTensor","model":"my-wide-resnet-speedy","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar10_whitened.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":45.17,"init_value":10,"train_acc":42.582131410256,"widen_factor":2,"imageSize":32,"train_time":18.980719089508,"save":"logs\/my-wide-resnet-speedy_1937016469","dampening":0,"shortcutType":"A","epoch":1,"nGPU":1,"depth":10,"learningRateDecay":0.00015,"hflip":true,"max_epoch":500,"num_classes":10,"lr":0.05,"learningRateDecayRatio":1,"generate_graph":false,"train_loss":1.5597534522032,"randomcrop_type":"reflection","test_time":1.1255221366882,"n_parameters":306066,"epoch_step":1,"loss":1.5597534522032}	
+==> online epoch # 2 [batchSize = 128]	
+{
+  epoch : 2
+  test_acc : 53.16
+  loss : 1.0718831695043
+  train_acc : 61.704727564103
+  lr : 0.05
+  train_time : 17.900840044022
+  test_time : 1.0506551265717
+  n_parameters : 306066
+  train_loss : 1.0718831695043
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 10
+  init_value : 10
+  randomcrop : 4
+  batchSize : 128
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.05
+  model : "my-wide-resnet-speedy"
+  save : "logs/my-wide-resnet-speedy_1937016469"
+  dampening : 0
+  learningRateDecayRatio : 1
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 10
+  weightDecay : 0.0005
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar10_whitened.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.05,"randomcrop":4,"batchSize":128,"data_type":"torch.CudaTensor","model":"my-wide-resnet-speedy","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar10_whitened.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":53.16,"init_value":10,"train_acc":61.704727564103,"widen_factor":2,"imageSize":32,"train_time":17.900840044022,"save":"logs\/my-wide-resnet-speedy_1937016469","dampening":0,"shortcutType":"A","epoch":2,"nGPU":1,"depth":10,"learningRateDecay":0.00015,"hflip":true,"max_epoch":500,"num_classes":10,"lr":0.05,"learningRateDecayRatio":1,"generate_graph":false,"train_loss":1.0718831695043,"randomcrop_type":"reflection","test_time":1.0506551265717,"n_parameters":306066,"epoch_step":1,"loss":1.0718831695043}	
+==> online epoch # 3 [batchSize = 128]	

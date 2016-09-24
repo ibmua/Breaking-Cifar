@@ -1,0 +1,320 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.1
+  model : "wide-res-restructured-dot-4g-endmax-moar"
+  save : "logs/wide-res-restructured-dot-4g-endmax-moar_361720156"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 28
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 1
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+==> loading data	
+==> configuring model	
+16	32	1	1	1	1	0	0	1	
+32	64	3	3	1	1	1	1	8	
+64	32	1	1	1	1	0	0	2	
+32	16	1	1	1	1	0	0	1	
+16	32	1	1	1	1	0	0	1	
+32	64	3	3	1	1	1	1	8	
+64	32	1	1	1	1	0	0	2	
+32	16	1	1	1	1	0	0	1	
+16	64	1	1	1	1	0	0	1	
+64	128	3	3	1	1	1	1	4	
+128	64	1	1	2	2	0	0	2	
+64	32	1	1	1	1	0	0	1	
+32	64	1	1	1	1	0	0	1	
+64	128	3	3	1	1	1	1	4	
+128	64	1	1	1	1	0	0	2	
+64	32	1	1	1	1	0	0	1	
+32	128	1	1	1	1	0	0	1	
+128	256	3	3	1	1	1	1	2	
+256	128	1	1	2	2	0	0	2	
+128	64	1	1	1	1	0	0	1	
+64	128	1	1	1	1	0	0	1	
+128	256	3	3	1	1	1	1	2	
+256	128	1	1	1	1	0	0	2	
+128	64	1	1	1	1	0	0	1	
+forward output	{
+  1 : CudaTensor - size: 1x100
+}
+backward output	{
+  1 : CudaTensor - size: 1x3x32x32
+}
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+  (1): cudnn.SpatialConvolution(3 -> 16, 3x3, 1,1, 1,1) without bias
+  (2): nn.Sequential {
+    [input -> (1) -> (2) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> output]
+      (1): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> output]
+          |      (1): cudnn.SpatialBatchNormalization
+          |      (2): cudnn.ReLU
+          |      (3): cudnn.SpatialConvolution(16 -> 32, 1x1) without bias
+          |      (4): cudnn.SpatialBatchNormalization
+          |      (5): cudnn.ReLU
+          |      (6): cudnn.SpatialConvolution(32 -> 64, 3x3, 1,1, 1,1) without bias
+          |      (7): cudnn.SpatialBatchNormalization
+          |      (8): cudnn.ReLU
+          |      (9): cudnn.SpatialConvolution(64 -> 32, 1x1) without bias
+          |      (10): cudnn.SpatialBatchNormalization
+          |      (11): cudnn.ReLU
+          |      (12): cudnn.SpatialConvolution(32 -> 16, 1x1) without bias
+          |    }
+          |`-> (2): nn.Identity
+           ... -> output
+      }
+      (2): nn.CMulTable
+    }
+    (2): nn.Sequential {
+      [input -> (1) -> (2) -> output]
+      (1): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> output]
+          |      (1): cudnn.SpatialBatchNormalization
+          |      (2): cudnn.ReLU
+          |      (3): cudnn.SpatialConvolution(16 -> 32, 1x1) without bias
+          |      (4): cudnn.SpatialBatchNormalization
+          |      (5): cudnn.ReLU
+          |      (6): cudnn.SpatialConvolution(32 -> 64, 3x3, 1,1, 1,1) without bias
+          |      (7): cudnn.SpatialBatchNormalization
+          |      (8): cudnn.ReLU
+          |      (9): cudnn.SpatialConvolution(64 -> 32, 1x1) without bias
+          |      (10): cudnn.SpatialBatchNormalization
+          |      (11): cudnn.ReLU
+          |      (12): cudnn.SpatialConvolution(32 -> 16, 1x1) without bias
+          |    }
+          |`-> (2): nn.Identity
+           ... -> output
+      }
+      (2): nn.CMulTable
+    }
+  }
+  (3): nn.Sequential {
+    [input -> (1) -> (2) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> (3) -> (4) -> output]
+      (1): cudnn.SpatialBatchNormalization
+      (2): cudnn.ReLU
+      (3): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> output]
+          |      (1): cudnn.SpatialConvolution(16 -> 64, 1x1) without bias
+          |      (2): cudnn.SpatialBatchNormalization
+          |      (3): cudnn.ReLU
+          |      (4): cudnn.SpatialConvolution(64 -> 128, 3x3, 1,1, 1,1) without bias
+          |      (5): cudnn.SpatialBatchNormalization
+          |      (6): cudnn.ReLU
+          |      (7): cudnn.SpatialConvolution(128 -> 64, 1x1) without bias
+          |      (8): cudnn.SpatialMaxPooling(2x2, 2,2)
+          |      (9): cudnn.SpatialBatchNormalization
+          |      (10): cudnn.ReLU
+          |      (11): cudnn.SpatialConvolution(64 -> 32, 1x1) without bias
+          |    }
+          |`-> (2): cudnn.SpatialConvolution(16 -> 32, 1x1, 2,2) without bias
+           ... -> output
+      }
+      (4): nn.CMulTable
+    }
+    (2): nn.Sequential {
+      [input -> (1) -> (2) -> output]
+      (1): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> output]
+          |      (1): cudnn.SpatialBatchNormalization
+          |      (2): cudnn.ReLU
+          |      (3): cudnn.SpatialConvolution(32 -> 64, 1x1) without bias
+          |      (4): cudnn.SpatialBatchNormalization
+          |      (5): cudnn.ReLU
+          |      (6): cudnn.SpatialConvolution(64 -> 128, 3x3, 1,1, 1,1) without bias
+          |      (7): cudnn.SpatialBatchNormalization
+          |      (8): cudnn.ReLU
+          |      (9): cudnn.SpatialConvolution(128 -> 64, 1x1) without bias
+          |      (10): cudnn.SpatialBatchNormalization
+          |      (11): cudnn.ReLU
+          |      (12): cudnn.SpatialConvolution(64 -> 32, 1x1) without bias
+          |    }
+          |`-> (2): nn.Identity
+           ... -> output
+      }
+      (2): nn.CMulTable
+    }
+  }
+  (4): nn.Sequential {
+    [input -> (1) -> (2) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> (3) -> (4) -> output]
+      (1): cudnn.SpatialBatchNormalization
+      (2): cudnn.ReLU
+      (3): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> output]
+          |      (1): cudnn.SpatialConvolution(32 -> 128, 1x1) without bias
+          |      (2): cudnn.SpatialBatchNormalization
+          |      (3): cudnn.ReLU
+          |      (4): cudnn.SpatialConvolution(128 -> 256, 3x3, 1,1, 1,1) without bias
+          |      (5): cudnn.SpatialBatchNormalization
+          |      (6): cudnn.ReLU
+          |      (7): cudnn.SpatialConvolution(256 -> 128, 1x1) without bias
+          |      (8): cudnn.SpatialMaxPooling(2x2, 2,2)
+          |      (9): cudnn.SpatialBatchNormalization
+          |      (10): cudnn.ReLU
+          |      (11): cudnn.SpatialConvolution(128 -> 64, 1x1) without bias
+          |    }
+          |`-> (2): cudnn.SpatialConvolution(32 -> 64, 1x1, 2,2) without bias
+           ... -> output
+      }
+      (4): nn.CMulTable
+    }
+    (2): nn.Sequential {
+      [input -> (1) -> (2) -> output]
+      (1): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> output]
+          |      (1): cudnn.SpatialBatchNormalization
+          |      (2): cudnn.ReLU
+          |      (3): cudnn.SpatialConvolution(64 -> 128, 1x1) without bias
+          |      (4): cudnn.SpatialBatchNormalization
+          |      (5): cudnn.ReLU
+          |      (6): cudnn.SpatialConvolution(128 -> 256, 3x3, 1,1, 1,1) without bias
+          |      (7): cudnn.SpatialBatchNormalization
+          |      (8): cudnn.ReLU
+          |      (9): cudnn.SpatialConvolution(256 -> 128, 1x1) without bias
+          |      (10): cudnn.SpatialBatchNormalization
+          |      (11): cudnn.ReLU
+          |      (12): cudnn.SpatialConvolution(128 -> 64, 1x1) without bias
+          |    }
+          |`-> (2): nn.Identity
+           ... -> output
+      }
+      (2): nn.CMulTable
+    }
+  }
+  (5): cudnn.SpatialBatchNormalization
+  (6): cudnn.ReLU
+  (7): cudnn.SpatialAveragePooling(8x8, 1,1)
+  (8): nn.View(64)
+  (9): nn.Linear(64 -> 100)
+}
+Network has	27	convolutions	
+Will save at logs/wide-res-restructured-dot-4g-endmax-moar_361720156	
+==> online epoch # 1 [batchSize = 64]	
+{
+  epoch : 1
+  test_acc : 1
+  loss : 4.5704211926186
+  train_acc : 1.458466709347
+  lr : 0.09885
+  train_time : 28.722416877747
+  test_time : 2.6218190193176
+  n_parameters : 430836
+  train_loss : 4.5704211926186
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.09885
+  model : "wide-res-restructured-dot-4g-endmax-moar"
+  save : "logs/wide-res-restructured-dot-4g-endmax-moar_361720156"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 28
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 1
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.09885,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"wide-res-restructured-dot-4g-endmax-moar","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0003,"test_acc":1,"init_value":10,"train_acc":1.458466709347,"widen_factor":1,"imageSize":32,"train_time":28.722416877747,"save":"logs\/wide-res-restructured-dot-4g-endmax-moar_361720156","dampening":0,"shortcutType":"A","epoch":1,"nGPU":1,"depth":28,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.09885,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":4.5704211926186,"randomcrop_type":"reflection","test_time":2.6218190193176,"n_parameters":430836,"epoch_step":1,"loss":4.5704211926186}	
+==> online epoch # 2 [batchSize = 64]	
+{
+  epoch : 2
+  test_acc : 2.35
+  loss : 4.5305179371266
+  train_acc : 1.8505921895006
+  lr : 0.0977115
+  train_time : 29.936893939972
+  test_time : 2.3751890659332
+  n_parameters : 430836
+  train_loss : 4.5305179371266
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.0977115
+  model : "wide-res-restructured-dot-4g-endmax-moar"
+  save : "logs/wide-res-restructured-dot-4g-endmax-moar_361720156"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 28
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 1
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.0977115,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"wide-res-restructured-dot-4g-endmax-moar","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0003,"test_acc":2.35,"init_value":10,"train_acc":1.8505921895006,"widen_factor":1,"imageSize":32,"train_time":29.936893939972,"save":"logs\/wide-res-restructured-dot-4g-endmax-moar_361720156","dampening":0,"shortcutType":"A","epoch":2,"nGPU":1,"depth":28,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.0977115,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":4.5305179371266,"randomcrop_type":"reflection","test_time":2.3751890659332,"n_parameters":430836,"epoch_step":1,"loss":4.5305179371266}	
+==> online epoch # 3 [batchSize = 64]	

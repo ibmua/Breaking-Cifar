@@ -1,0 +1,51 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  init_value : 10
+  randomcrop : 4
+  batchSize : 128
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.1
+  model : "supershallow-1-original"
+  save : "logs/supershallow-1-original_185561166"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 40
+  weightDecay : 5e-07
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_whitened.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 1
+  hflip : true
+  dropout : 0
+  learningRateDecay : 5e-05
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+==> loading data	
+==> configuring model	
+forward output	{
+  1 : CudaTensor - size: 64x100
+}
+backward output	{
+  1 : CudaTensor - size: 1x3x32x32
+}
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> output]
+  (1): cudnn.SpatialConvolution(3 -> 36, 3x3, 1,1, 1,1) without bias
+  (2): cudnn.SpatialBatchNormalization
+  (3): cudnn.ReLU
+  (4): cudnn.SpatialAveragePooling(5x5, 4,4, 1,1)
+  (5): nn.View(36)
+  (6): nn.Linear(36 -> 100)
+}
+Network has	1	convolutions	
+Will save at logs/supershallow-1-original_185561166	
+==> online epoch # 1 [batchSize = 128]	

@@ -1,0 +1,56 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  init_value : 10
+  randomcrop : 4
+  batchSize : 128
+  epoch_step : 
+    {
+      1 : 60
+      2 : 120
+      3 : 160
+    }
+  randomcrop_type : "reflection"
+  learningRate : 0.1
+  model : "my"
+  save : "logs/my_285832477"
+  dampening : 0
+  learningRateDecayRatio : 0.2
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 50
+  weightDecay : 0.0005
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar10_whitened.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 200
+  widen_factor : 1
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+==> loading data	
+==> configuring model	
+3	10368	
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> (13) -> output]
+  (1): cudnn.SpatialConvolution(3 -> 36, 3x3)
+  (2): cudnn.SpatialBatchNormalization
+  (3): cudnn.SpatialMaxPooling(3x3, 2,2)
+  (4): nn.PReLU
+  (5): cudnn.SpatialConvolution(36 -> 1296, 3x3)
+  (6): cudnn.SpatialBatchNormalization
+  (7): cudnn.SpatialMaxPooling(3x3, 2,2)
+  (8): nn.PReLU
+  (9): cudnn.SpatialConvolution(1296 -> 10368, 4x4)
+  (10): cudnn.SpatialBatchNormalization
+  (11): nn.PReLU
+  (12): nn.Reshape(93312)
+  (13): nn.Linear(93312 -> 10)
+}
+Network has	3	convolutions	

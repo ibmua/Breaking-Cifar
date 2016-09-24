@@ -1,0 +1,446 @@
+require 'nn'
+local utils = paths.dofile'utils.lua'
+require 'cunn'
+require 'cudnn'
+---
+torch.setdefaulttensortype('torch.CudaTensor')
+---
+
+local Convolution = cudnn.SpatialConvolution
+
+
+width 		= 1
+depth 		= 3
+sequences 	= 1
+
+
+function deepcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[deepcopy(orig_key)] = deepcopy(orig_value)
+        end
+        setmetatable(copy, deepcopy(getmetatable(orig)))
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+
+function	Convolutions(convs)
+
+	-- print(convs)
+
+	m	=	nn.Sequential()
+	for	i	,	c	in	ipairs(convs)	do
+		-- print(c)
+		m	:add(
+				Convolution	(
+								c[1],c[2]
+							,
+								c[3],c[4]
+							,
+								c[5],c[6]
+							,
+								c[7],c[8]
+							,
+								c[9]
+							)
+				)
+			:add(
+				nn.SpatialBatchNormalization(c[2],1e-5)
+				)
+			:add(
+				nn.ReLU(true)
+				-- nn.ELU()
+				)
+
+		end
+
+	return m
+	end
+
+
+function build	(
+					ins_input
+				,	outs
+				)
+
+	local ins = ins_input
+	local module = nn.Sequential()
+
+
+	for	seq	=	1,	sequences	do
+
+		local	conv_params_pool	=
+										{
+											{
+												{	ins			,	ins	*4		,	3,3	,	1,1,	1,1	,	4		}
+											,	{	ins	*4		,	ins	*2		,	3,3	,	1,1,	1,1	,	2		}
+											}
+										,
+											{
+												{	ins			,	ins	*2		,	1,1	,	1,1,	0,0	,	1		}
+											,	{	ins	*2		,	ins	*8		,	3,3	,	1,1,	1,1	,	8		}
+											,	{	ins	*8		,	ins	*4		,	3,3	,	1,1,	1,1	,	2		}
+											}
+										,
+											{
+												{	ins			,	ins	*2		,	3,3	,	1,1,	1,1	,	1		}
+											}
+										,
+											{
+												{	ins			,	ins	/2		,	1,7	,	1,1,	0,3	,	1		}
+											,	{	ins	/2		,	ins	/2		,	7,1	,	1,1,	3,0	,	4		}
+											}
+
+										}
+		-- print(conv_params)
+
+		local	conv_params 		=	{}
+
+		for i = 1 , depth do
+			-- table.insert
+			-- 	(
+			-- 		conv_params
+			-- 	,	table.copy( conv_params[1] )
+			-- 	,	1
+			-- 	)
+			conv_params[i] =
+							deepcopy(
+									conv_params_pool[ i ]
+									)
+
+			end
+
+		conv_params[1][1][1] = ins
+
+
+		for	i	,	c	in	ipairs(conv_params)	do
+
+			if	i ~= 1	then
+				conv_params	[ i ]
+							[ 1 ]
+							[ 1 ] =
+										-- output of last
+											conv_params	[
+															i-1
+														]
+														[
+															#conv_params[ i-1 ]
+														]
+														[
+															2
+														]
+										--	+	input to first
+										+	conv_params	[
+															i-1
+														]
+														[
+															1
+															-- #conv_params[ i-1 ]
+														]
+														[
+															1
+														]
+				end
+
+			-- conv_params[i][2] =
+			-- 						ins
+			-- 					+	conv_params[i][1]
+
+			end
+
+		-- print('conv_params', conv_params)
+
+
+		for	i	,	c	in	ipairs(conv_params)	do
+			-- print(c)
+			module
+				:add(
+					nn.Concat(2)
+						:add(
+							nn.Identity()
+							)
+						-- :add(
+							-- nn.Sequential()
+						:add(
+							Convolutions( c )
+							)
+							-- )
+					)
+			end
+
+
+		module
+			:add(
+				Convolution	(
+										conv_params	[ #conv_params 						]
+													[ #conv_params[ #conv_params ] 		]
+													[ 2 ]
+									-- +	ins
+									+
+										conv_params	[ #conv_params 						]
+													[ 1				 					]
+													-- [ #conv_params[ #conv_params ] 		]
+													[ 1 ]
+									-- ins*4
+								,	outs
+							,
+								1,1
+							)
+				)
+			:add(
+				nn.SpatialBatchNormalization( outs ,1e-5)
+				)
+			:add(
+				nn.ReLU(true)
+				)
+
+
+		ins	=	outs
+		end
+
+	return	module
+
+	end
+
+
+
+-- pad = (ker-1)/2
+--
+-- recursive =
+-- 	nn.Sequential()
+-- 		:add(
+-- 			Convolution
+-- 				(
+-- 					x	,	x*4
+-- 				,	ker	,	ker
+-- 				,	1	,	1
+-- 				,	pad	,	pad
+-- 				)
+-- 			)
+-- 		:add(
+-- 			nn.Concat(2)
+-- 				:add(
+-- 					recurse
+-- 						(
+-- 							depth-1
+-- 						,	x*4
+-- 						,	ker
+-- 						)
+-- 					)
+-- 				:add(
+-- 					)
+-- 			)
+-- 		:add(
+-- 			nn.SpatialBatchNormalization
+-- 				(
+-- 				x*4	,	1e-5
+-- 				)
+-- 			)
+-- 		-- :add(
+-- 		-- 	nn.ReLU(true)
+-- 		-- 	)
+-- 		:add(
+-- 			nn.PReLU
+-- 				(
+-- 				x*4
+-- 				)
+-- 			)
+-- 		:add(
+-- 			Convolution
+-- 				(
+-- 					x*4	,	x*2
+-- 				,	1	,	1
+-- 				,	1	,	1
+-- 				,	0	,	0
+-- 				)
+-- 			)
+-- 		:add(
+-- 			nn.SpatialBatchNormalization
+-- 				(
+-- 				x*2	,	1e-5
+-- 				)
+-- 			)
+-- 		:add(
+-- 			nn.PReLU
+-- 				(
+-- 				x*2
+-- 				)
+-- 			)
+-- 		:add(
+-- 			Convolution
+-- 				(
+-- 					x*2	,	x
+-- 				,	1	,	1
+-- 				,	1	,	1
+-- 				,	0	,	0
+-- 				)
+-- 			)
+-- 		:add(
+-- 			nn.SpatialBatchNormalization
+-- 				(
+-- 				x	,	1e-5
+-- 				)
+-- 			)
+		-- :add(
+		-- 	nn.PReLU
+		-- 		(
+		-- 		x
+		-- 		)
+		-- 	)
+			-- nn.ReLU(true)
+
+
+
+
+
+local function createModel(opt)
+
+	width		= opt.widen_factor
+	depth		= opt.depth
+	sequences	= opt.sequences
+
+	local model = nn.Sequential()
+
+	-- local function Block(...)
+	-- 	local arg = {...}
+	-- 	model:add(cudnn.SpatialConvolution(...):noBias())
+	-- 	model:add(nn.SpatialBatchNormalization(arg[2],1e-5))
+	-- 	model:add(nn.ReLU(true))
+	--  --	model:add(nn.ELU())
+	-- 	return model
+	-- end
+
+	--32
+	model
+		:add(
+			nn.Concat(2)
+				:add(
+					nn.Identity()
+					)
+				:add(
+					Convolutions(
+									{
+										{	3	,	32 - 3	,	3,3	,	1,1,	1,1	,	1	}
+									}
+								)
+					)
+			)
+		:add(
+			nn.Concat(2)
+				:add(
+					nn.Identity()
+					)
+				:add(
+					build	(
+								32
+							,	64	* width
+							)
+					)
+			)
+
+		:add(
+			nn.SpatialAdaptiveMaxPooling
+				( 24,24 )
+			)
+		--24
+
+		:add(
+			nn.Concat(2)
+				:add(
+					nn.Identity()
+					)
+				:add(
+					build	(
+								64	* width + 32
+							,	64	* width
+							)
+					)
+			)
+
+		:add(
+			nn.SpatialFractionalMaxPooling
+				( 3,3, 0.667, 0.667 )
+			)
+		--16
+
+		-- :add(
+		-- 	nn.SpatialMaxPooling(3,3,2,2):ceil()
+		-- 	)
+		--16
+
+		:add(
+			build	(
+						64	* width		+	64	* width + 32
+					,	128	* width
+					)
+			)
+
+		-- :add(
+		-- 	Convolutions(
+		-- 					{
+		-- 						{	128	,	128	,	3,3	,	1,1,	1,1	,	8	}
+		-- 					,	{	128	,	256	,	1,1	,	1,1,	0,0	,	1	}
+		-- 					}
+		-- 				)
+		-- 	)
+
+		:add(
+			-- nn.SpatialMaxPooling(3,3,2,2):ceil()
+			nn.SpatialAdaptiveMaxPooling
+				( 12,12 )
+			)
+		--12
+
+		:add(
+			build	(
+						128	* width
+					,	256	* width
+					)
+			)
+
+
+
+		-- :add(
+		-- 	Convolutions(
+		-- 					{
+		-- 						{	256	,	256	,	3,3	,	1,1,	1,1	,	4	}
+		-- 					,	{	256	,	256	,	1,1	,	1,1,	0,0	,	1	}
+		-- 					}
+		-- 				)
+		-- 	)
+
+		-- nn.VolumetricAveragePooling(1,8,8, 1,1,1)
+		:add(
+			nn.SpatialMaxPooling(3,3,2,2):ceil()
+			)
+		:add(
+			nn.SpatialAveragePooling(6,6,1,1):ceil()
+			)
+		:add(
+			nn.View(-1):setNumInputDims(3)
+			)
+		:add(
+			nn.Linear	(
+							256	* width
+						-- ,	opt and opt.num_classes or 10
+						,	100
+						)
+			)
+
+	utils.FCinit(model)
+	utils.testModel(model)
+	utils.MSRinit(model)
+
+	return model
+end
+
+return createModel
+
+
+-- model=nin ./scripts/train_cifar.sh

@@ -1,0 +1,2659 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  learningRate : 0.1
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+==> loading data	
+==> configuring model	
+forward output	{
+  1 : CudaTensor - size: 1x100
+}
+backward output	{
+  1 : CudaTensor - size: 1x3x32x32
+}
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> output]
+  (1): cudnn.SpatialConvolution(3 -> 32, 3x3, 1,1, 1,1) without bias
+  (2): cudnn.SpatialBatchNormalization
+  (3): cudnn.ReLU
+  (4): nn.Sequential {
+    [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> output]
+    (1): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> output]
+               (1): cudnn.SpatialConvolution(32 -> 128, 3x3, 1,1, 1,1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(128 -> 64, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (2): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+               (1): cudnn.SpatialConvolution(96 -> 64, 1x1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(64 -> 256, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+               (7): cudnn.SpatialConvolution(256 -> 128, 3x3, 1,1, 1,1)
+               (8): cudnn.SpatialBatchNormalization
+               (9): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (3): cudnn.SpatialConvolution(224 -> 64, 1x1)
+    (4): cudnn.SpatialBatchNormalization
+    (5): cudnn.ReLU
+    (6): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> output]
+               (1): cudnn.SpatialConvolution(64 -> 256, 3x3, 1,1, 1,1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(256 -> 128, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (7): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+               (1): cudnn.SpatialConvolution(192 -> 128, 1x1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(128 -> 512, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+               (7): cudnn.SpatialConvolution(512 -> 256, 3x3, 1,1, 1,1)
+               (8): cudnn.SpatialBatchNormalization
+               (9): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (8): cudnn.SpatialConvolution(448 -> 64, 1x1)
+    (9): cudnn.SpatialBatchNormalization
+    (10): cudnn.ReLU
+  }
+  (5): cudnn.SpatialMaxPooling(3x3, 2,2)
+  (6): nn.Sequential {
+    [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> output]
+    (1): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> output]
+               (1): cudnn.SpatialConvolution(64 -> 256, 3x3, 1,1, 1,1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(256 -> 128, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (2): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+               (1): cudnn.SpatialConvolution(192 -> 128, 1x1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(128 -> 512, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+               (7): cudnn.SpatialConvolution(512 -> 256, 3x3, 1,1, 1,1)
+               (8): cudnn.SpatialBatchNormalization
+               (9): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (3): cudnn.SpatialConvolution(448 -> 128, 1x1)
+    (4): cudnn.SpatialBatchNormalization
+    (5): cudnn.ReLU
+    (6): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> output]
+               (1): cudnn.SpatialConvolution(128 -> 512, 3x3, 1,1, 1,1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(512 -> 256, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (7): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+               (1): cudnn.SpatialConvolution(384 -> 256, 1x1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(256 -> 1024, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+               (7): cudnn.SpatialConvolution(1024 -> 512, 3x3, 1,1, 1,1)
+               (8): cudnn.SpatialBatchNormalization
+               (9): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (8): cudnn.SpatialConvolution(896 -> 128, 1x1)
+    (9): cudnn.SpatialBatchNormalization
+    (10): cudnn.ReLU
+  }
+  (7): cudnn.SpatialMaxPooling(3x3, 2,2)
+  (8): nn.Sequential {
+    [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> output]
+    (1): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> output]
+               (1): cudnn.SpatialConvolution(128 -> 512, 3x3, 1,1, 1,1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(512 -> 256, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (2): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+               (1): cudnn.SpatialConvolution(384 -> 256, 1x1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(256 -> 1024, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+               (7): cudnn.SpatialConvolution(1024 -> 512, 3x3, 1,1, 1,1)
+               (8): cudnn.SpatialBatchNormalization
+               (9): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (3): cudnn.SpatialConvolution(896 -> 256, 1x1)
+    (4): cudnn.SpatialBatchNormalization
+    (5): cudnn.ReLU
+    (6): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> output]
+               (1): cudnn.SpatialConvolution(256 -> 1024, 3x3, 1,1, 1,1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(1024 -> 512, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (7): nn.Concat {
+      input
+        |`-> (1): nn.Identity
+        |`-> (2): nn.Sequential {
+               [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+               (1): cudnn.SpatialConvolution(768 -> 512, 1x1)
+               (2): cudnn.SpatialBatchNormalization
+               (3): cudnn.ReLU
+               (4): cudnn.SpatialConvolution(512 -> 2048, 3x3, 1,1, 1,1)
+               (5): cudnn.SpatialBatchNormalization
+               (6): cudnn.ReLU
+               (7): cudnn.SpatialConvolution(2048 -> 1024, 3x3, 1,1, 1,1)
+               (8): cudnn.SpatialBatchNormalization
+               (9): cudnn.ReLU
+             }
+         ... -> output
+    }
+    (8): cudnn.SpatialConvolution(1792 -> 256, 1x1)
+    (9): cudnn.SpatialBatchNormalization
+    (10): cudnn.ReLU
+  }
+  (9): cudnn.VolumetricAveragePooling
+  (10): nn.View(-1)
+  (11): nn.Linear(256 -> 100)
+}
+Network has	37	convolutions	
+Will save at logs/hoard-2-x_2442625743	
+==> online epoch # 1 [batchSize = 64]	
+{
+  epoch : 1
+  test_acc : 14.05
+  loss : 3.928089256018
+  train_acc : 8.6687740076825
+  lr : 0.09892
+  train_time : 205.22917318344
+  test_time : 14.976817131042
+  n_parameters : 23874564
+  train_loss : 3.928089256018
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.09892
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":3.928089256018,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":14.05,"init_value":10,"train_acc":8.6687740076825,"sequences":2,"epoch_step":1,"train_time":205.22917318344,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":1,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.09892,"generate_graph":false,"learningRate":0.09892,"train_loss":3.928089256018,"randomcrop_type":"reflection","test_time":14.976817131042,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 2 [batchSize = 64]	
+{
+  epoch : 2
+  test_acc : 26.82
+  loss : 3.2325705251682
+  train_acc : 19.892365556978
+  lr : 0.09784972
+  train_time : 208.98345184326
+  test_time : 13.836032152176
+  n_parameters : 23874564
+  train_loss : 3.2325705251682
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.09784972
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":3.2325705251682,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":26.82,"init_value":10,"train_acc":19.892365556978,"sequences":2,"epoch_step":1,"train_time":208.98345184326,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":2,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.09784972,"generate_graph":false,"learningRate":0.09784972,"train_loss":3.2325705251682,"randomcrop_type":"reflection","test_time":13.836032152176,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 3 [batchSize = 64]	
+{
+  epoch : 3
+  test_acc : 36.21
+  loss : 2.5532066883107
+  train_acc : 32.680457746479
+  lr : 0.09678907252
+  train_time : 208.20157790184
+  test_time : 13.788229942322
+  n_parameters : 23874564
+  train_loss : 2.5532066883107
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.09678907252
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":2.5532066883107,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":36.21,"init_value":10,"train_acc":32.680457746479,"sequences":2,"epoch_step":1,"train_time":208.20157790184,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":3,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.09678907252,"generate_graph":false,"learningRate":0.09678907252,"train_loss":2.5532066883107,"randomcrop_type":"reflection","test_time":13.788229942322,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 4 [batchSize = 64]	
+{
+  epoch : 4
+  test_acc : 39.96
+  loss : 2.2116408233606
+  train_acc : 40.168854033291
+  lr : 0.09573797086732
+  train_time : 207.81217193604
+  test_time : 13.768537044525
+  n_parameters : 23874564
+  train_loss : 2.2116408233606
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.09573797086732
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":2.2116408233606,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":39.96,"init_value":10,"train_acc":40.168854033291,"sequences":2,"epoch_step":1,"train_time":207.81217193604,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":4,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.09573797086732,"generate_graph":false,"learningRate":0.09573797086732,"train_loss":2.2116408233606,"randomcrop_type":"reflection","test_time":13.768537044525,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 5 [batchSize = 64]	
+{
+  epoch : 5
+  test_acc : 45.27
+  loss : 1.9601835575665
+  train_acc : 46.13076184379
+  lr : 0.094696329129514
+  train_time : 207.5126709938
+  test_time : 13.707757949829
+  n_parameters : 23874564
+  train_loss : 1.9601835575665
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.094696329129514
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.9601835575665,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":45.27,"init_value":10,"train_acc":46.13076184379,"sequences":2,"epoch_step":1,"train_time":207.5126709938,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":5,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.094696329129514,"generate_graph":false,"learningRate":0.094696329129514,"train_loss":1.9601835575665,"randomcrop_type":"reflection","test_time":13.707757949829,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 6 [batchSize = 64]	
+{
+  epoch : 6
+  test_acc : 45.35
+  loss : 1.8033109083676
+  train_acc : 49.697903329065
+  lr : 0.093664062167348
+  train_time : 207.82368612289
+  test_time : 13.732400894165
+  n_parameters : 23874564
+  train_loss : 1.8033109083676
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.093664062167348
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.8033109083676,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":45.35,"init_value":10,"train_acc":49.697903329065,"sequences":2,"epoch_step":1,"train_time":207.82368612289,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":6,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.093664062167348,"generate_graph":false,"learningRate":0.093664062167348,"train_loss":1.8033109083676,"randomcrop_type":"reflection","test_time":13.732400894165,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 7 [batchSize = 64]	
+{
+  epoch : 7
+  test_acc : 44.99
+  loss : 1.7812100352765
+  train_acc : 50.454145326504
+  lr : 0.092641085607842
+  train_time : 207.70040392876
+  test_time : 13.784958124161
+  n_parameters : 23874564
+  train_loss : 1.7812100352765
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.092641085607842
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.7812100352765,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":44.99,"init_value":10,"train_acc":50.454145326504,"sequences":2,"epoch_step":1,"train_time":207.70040392876,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":7,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.092641085607842,"generate_graph":false,"learningRate":0.092641085607842,"train_loss":1.7812100352765,"randomcrop_type":"reflection","test_time":13.784958124161,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 8 [batchSize = 64]	
+{
+  epoch : 8
+  test_acc : 50.39
+  loss : 1.6638373621905
+  train_acc : 53.369078104994
+  lr : 0.091627315837372
+  train_time : 207.58021712303
+  test_time : 13.760774850845
+  n_parameters : 23874564
+  train_loss : 1.6638373621905
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.091627315837372
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.6638373621905,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":50.39,"init_value":10,"train_acc":53.369078104994,"sequences":2,"epoch_step":1,"train_time":207.58021712303,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":8,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.091627315837372,"generate_graph":false,"learningRate":0.091627315837372,"train_loss":1.6638373621905,"randomcrop_type":"reflection","test_time":13.760774850845,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 9 [batchSize = 64]	
+{
+  epoch : 9
+  test_acc : 48.49
+  loss : 1.6282053694377
+  train_acc : 54.315380921895
+  lr : 0.090622669994835
+  train_time : 207.93757581711
+  test_time : 13.81115603447
+  n_parameters : 23874564
+  train_loss : 1.6282053694377
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.090622669994835
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.6282053694377,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":48.49,"init_value":10,"train_acc":54.315380921895,"sequences":2,"epoch_step":1,"train_time":207.93757581711,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":9,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.090622669994835,"generate_graph":false,"learningRate":0.090622669994835,"train_loss":1.6282053694377,"randomcrop_type":"reflection","test_time":13.81115603447,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 10 [batchSize = 64]	
+{
+  epoch : 10
+  test_acc : 48.68
+  loss : 1.5338925520833
+  train_acc : 56.804177336748
+  lr : 0.089627065964882
+  train_time : 207.85666394234
+  test_time : 13.739526987076
+  n_parameters : 23874564
+  train_loss : 1.5338925520833
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.089627065964882
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.5338925520833,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":48.68,"init_value":10,"train_acc":56.804177336748,"sequences":2,"epoch_step":1,"train_time":207.85666394234,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":10,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.089627065964882,"generate_graph":false,"learningRate":0.089627065964882,"train_loss":1.5338925520833,"randomcrop_type":"reflection","test_time":13.739526987076,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 11 [batchSize = 64]	
+{
+  epoch : 11
+  test_acc : 54.3
+  loss : 1.5398159160657
+  train_acc : 56.494078104994
+  lr : 0.088640422371198
+  train_time : 207.92170000076
+  test_time : 13.791758060455
+  n_parameters : 23874564
+  train_loss : 1.5398159160657
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.088640422371198
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.5398159160657,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":54.3,"init_value":10,"train_acc":56.494078104994,"sequences":2,"epoch_step":1,"train_time":207.92170000076,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":11,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.088640422371198,"generate_graph":false,"learningRate":0.088640422371198,"train_loss":1.5398159160657,"randomcrop_type":"reflection","test_time":13.791758060455,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 12 [batchSize = 64]	
+{
+  epoch : 12
+  test_acc : 48.33
+  loss : 1.4519988860119
+  train_acc : 58.796814980794
+  lr : 0.087662658569857
+  train_time : 207.82362699509
+  test_time : 13.73436999321
+  n_parameters : 23874564
+  train_loss : 1.4519988860119
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.087662658569857
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.4519988860119,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":48.33,"init_value":10,"train_acc":58.796814980794,"sequences":2,"epoch_step":1,"train_time":207.82362699509,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":12,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.087662658569857,"generate_graph":false,"learningRate":0.087662658569857,"train_loss":1.4519988860119,"randomcrop_type":"reflection","test_time":13.73436999321,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 13 [batchSize = 64]	
+{
+  epoch : 13
+  test_acc : 51.78
+  loss : 1.474615390719
+  train_acc : 58.472711267606
+  lr : 0.086693694642728
+  train_time : 207.83845210075
+  test_time : 13.860008955002
+  n_parameters : 23874564
+  train_loss : 1.474615390719
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.086693694642728
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.474615390719,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":51.78,"init_value":10,"train_acc":58.472711267606,"sequences":2,"epoch_step":1,"train_time":207.83845210075,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":13,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.086693694642728,"generate_graph":false,"learningRate":0.086693694642728,"train_loss":1.474615390719,"randomcrop_type":"reflection","test_time":13.860008955002,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 14 [batchSize = 64]	
+{
+  epoch : 14
+  test_acc : 55.3
+  loss : 1.4133608932684
+  train_acc : 59.953185019206
+  lr : 0.085733451390944
+  train_time : 207.98069810867
+  test_time : 13.780997991562
+  n_parameters : 23874564
+  train_loss : 1.4133608932684
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.085733451390944
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.4133608932684,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":55.3,"init_value":10,"train_acc":59.953185019206,"sequences":2,"epoch_step":1,"train_time":207.98069810867,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":14,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.085733451390944,"generate_graph":false,"learningRate":0.085733451390944,"train_loss":1.4133608932684,"randomcrop_type":"reflection","test_time":13.780997991562,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 15 [batchSize = 64]	
+{
+  epoch : 15
+  test_acc : 53.54
+  loss : 1.3526041041416
+  train_acc : 61.179577464789
+  lr : 0.084781850328425
+  train_time : 207.95062994957
+  test_time : 13.92723107338
+  n_parameters : 23874564
+  train_loss : 1.3526041041416
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.084781850328425
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.3526041041416,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":53.54,"init_value":10,"train_acc":61.179577464789,"sequences":2,"epoch_step":1,"train_time":207.95062994957,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":15,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.084781850328425,"generate_graph":false,"learningRate":0.084781850328425,"train_loss":1.3526041041416,"randomcrop_type":"reflection","test_time":13.92723107338,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 16 [batchSize = 64]	
+{
+  epoch : 16
+  test_acc : 51.18
+  loss : 1.3085361197877
+  train_acc : 62.391965428937
+  lr : 0.08383881367547
+  train_time : 207.90098214149
+  test_time : 13.710168123245
+  n_parameters : 23874564
+  train_loss : 1.3085361197877
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.08383881367547
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.3085361197877,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":51.18,"init_value":10,"train_acc":62.391965428937,"sequences":2,"epoch_step":1,"train_time":207.90098214149,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":16,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.08383881367547,"generate_graph":false,"learningRate":0.08383881367547,"train_loss":1.3085361197877,"randomcrop_type":"reflection","test_time":13.710168123245,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 17 [batchSize = 64]	
+{
+  epoch : 17
+  test_acc : 54.7
+  loss : 1.2664300054503
+  train_acc : 63.522327144686
+  lr : 0.08290426435239
+  train_time : 207.74628305435
+  test_time : 13.718545913696
+  n_parameters : 23874564
+  train_loss : 1.2664300054503
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.08290426435239
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.2664300054503,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":54.7,"init_value":10,"train_acc":63.522327144686,"sequences":2,"epoch_step":1,"train_time":207.74628305435,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":17,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.08290426435239,"generate_graph":false,"learningRate":0.08290426435239,"train_loss":1.2664300054503,"randomcrop_type":"reflection","test_time":13.718545913696,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 18 [batchSize = 64]	
+{
+  epoch : 18
+  test_acc : 55.18
+  loss : 1.2283519066097
+  train_acc : 64.552656850192
+  lr : 0.081978125973219
+  train_time : 207.7006020546
+  test_time : 13.711096048355
+  n_parameters : 23874564
+  train_loss : 1.2283519066097
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.081978125973219
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.2283519066097,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":55.18,"init_value":10,"train_acc":64.552656850192,"sequences":2,"epoch_step":1,"train_time":207.7006020546,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":18,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.081978125973219,"generate_graph":false,"learningRate":0.081978125973219,"train_loss":1.2283519066097,"randomcrop_type":"reflection","test_time":13.711096048355,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 19 [batchSize = 64]	
+{
+  epoch : 19
+  test_acc : 48.66
+  loss : 1.3672631259306
+  train_acc : 61.153569142125
+  lr : 0.08106032283946
+  train_time : 207.95521092415
+  test_time : 13.692745923996
+  n_parameters : 23874564
+  train_loss : 1.3672631259306
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.08106032283946
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.3672631259306,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":48.66,"init_value":10,"train_acc":61.153569142125,"sequences":2,"epoch_step":1,"train_time":207.95521092415,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":19,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.08106032283946,"generate_graph":false,"learningRate":0.08106032283946,"train_loss":1.3672631259306,"randomcrop_type":"reflection","test_time":13.692745923996,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 20 [batchSize = 64]	
+{
+  epoch : 20
+  test_acc : 48.1
+  loss : 1.2867636755395
+  train_acc : 62.970150448143
+  lr : 0.080150779933905
+  train_time : 207.51830601692
+  test_time : 13.713273048401
+  n_parameters : 23874564
+  train_loss : 1.2867636755395
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.080150779933905
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.2867636755395,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":48.1,"init_value":10,"train_acc":62.970150448143,"sequences":2,"epoch_step":1,"train_time":207.51830601692,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":20,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.080150779933905,"generate_graph":false,"learningRate":0.080150779933905,"train_loss":1.2867636755395,"randomcrop_type":"reflection","test_time":13.713273048401,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 21 [batchSize = 64]	
+{
+  epoch : 21
+  test_acc : 52.85
+  loss : 1.2403997239322
+  train_acc : 64.446622919334
+  lr : 0.0792494229145
+  train_time : 207.93905496597
+  test_time : 13.867418050766
+  n_parameters : 23874564
+  train_loss : 1.2403997239322
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.0792494229145
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.2403997239322,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":52.85,"init_value":10,"train_acc":64.446622919334,"sequences":2,"epoch_step":1,"train_time":207.93905496597,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":21,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.0792494229145,"generate_graph":false,"learningRate":0.0792494229145,"train_loss":1.2403997239322,"randomcrop_type":"reflection","test_time":13.867418050766,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 22 [batchSize = 64]	
+{
+  epoch : 22
+  test_acc : 52.17
+  loss : 1.1986886546798
+  train_acc : 65.526968629962
+  lr : 0.078356178108269
+  train_time : 207.8837890625
+  test_time : 13.778398990631
+  n_parameters : 23874564
+  train_loss : 1.1986886546798
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.078356178108269
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.1986886546798,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":52.17,"init_value":10,"train_acc":65.526968629962,"sequences":2,"epoch_step":1,"train_time":207.8837890625,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":22,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.078356178108269,"generate_graph":false,"learningRate":0.078356178108269,"train_loss":1.1986886546798,"randomcrop_type":"reflection","test_time":13.778398990631,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 23 [batchSize = 64]	
+{
+  epoch : 23
+  test_acc : 57.62
+  loss : 1.2877126247568
+  train_acc : 63.08818822023
+  lr : 0.077470972505295
+  train_time : 208.01139593124
+  test_time : 13.741043806076
+  n_parameters : 23874564
+  train_loss : 1.2877126247568
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.077470972505295
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.2877126247568,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":57.62,"init_value":10,"train_acc":63.08818822023,"sequences":2,"epoch_step":1,"train_time":208.01139593124,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":23,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.077470972505295,"generate_graph":false,"learningRate":0.077470972505295,"train_loss":1.2877126247568,"randomcrop_type":"reflection","test_time":13.741043806076,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 24 [batchSize = 64]	
+{
+  epoch : 24
+  test_acc : 53.78
+  loss : 1.1899029848365
+  train_acc : 65.604993597951
+  lr : 0.076593733752747
+  train_time : 210.53274607658
+  test_time : 14.562088012695
+  n_parameters : 23874564
+  train_loss : 1.1899029848365
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.076593733752747
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.1899029848365,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":53.78,"init_value":10,"train_acc":65.604993597951,"sequences":2,"epoch_step":1,"train_time":210.53274607658,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":24,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.076593733752747,"generate_graph":false,"learningRate":0.076593733752747,"train_loss":1.1899029848365,"randomcrop_type":"reflection","test_time":14.562088012695,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 25 [batchSize = 64]	
+{
+  epoch : 25
+  test_acc : 53.06
+  loss : 1.2348258276297
+  train_acc : 64.468629961588
+  lr : 0.075724390148972
+  train_time : 209.39441609383
+  test_time : 13.829923868179
+  n_parameters : 23874564
+  train_loss : 1.2348258276297
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.075724390148972
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.2348258276297,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":53.06,"init_value":10,"train_acc":64.468629961588,"sequences":2,"epoch_step":1,"train_time":209.39441609383,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":25,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.075724390148972,"generate_graph":false,"learningRate":0.075724390148972,"train_loss":1.2348258276297,"randomcrop_type":"reflection","test_time":13.829923868179,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 26 [batchSize = 64]	
+{
+  epoch : 26
+  test_acc : 49.71
+  loss : 1.1587565436711
+  train_acc : 66.413252240717
+  lr : 0.074862870637632
+  train_time : 207.56916904449
+  test_time : 13.804027080536
+  n_parameters : 23874564
+  train_loss : 1.1587565436711
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.074862870637632
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.1587565436711,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":49.71,"init_value":10,"train_acc":66.413252240717,"sequences":2,"epoch_step":1,"train_time":207.56916904449,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":26,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.074862870637632,"generate_graph":false,"learningRate":0.074862870637632,"train_loss":1.1587565436711,"randomcrop_type":"reflection","test_time":13.804027080536,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 27 [batchSize = 64]	
+{
+  epoch : 27
+  test_acc : 59.9
+  loss : 1.2154681615427
+  train_acc : 65.03681177977
+  lr : 0.074009104801893
+  train_time : 207.74065685272
+  test_time : 13.847020149231
+  n_parameters : 23874564
+  train_loss : 1.2154681615427
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.074009104801893
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.2154681615427,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":59.9,"init_value":10,"train_acc":65.03681177977,"sequences":2,"epoch_step":1,"train_time":207.74065685272,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":27,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.074009104801893,"generate_graph":false,"learningRate":0.074009104801893,"train_loss":1.2154681615427,"randomcrop_type":"reflection","test_time":13.847020149231,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 28 [batchSize = 64]	
+{
+  epoch : 28
+  test_acc : 51.64
+  loss : 1.1620084740288
+  train_acc : 66.52128681178
+  lr : 0.073163022858676
+  train_time : 207.93284010887
+  test_time : 13.786755084991
+  n_parameters : 23874564
+  train_loss : 1.1620084740288
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.073163022858676
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.1620084740288,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":51.64,"init_value":10,"train_acc":66.52128681178,"sequences":2,"epoch_step":1,"train_time":207.93284010887,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":28,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.073163022858676,"generate_graph":false,"learningRate":0.073163022858676,"train_loss":1.1620084740288,"randomcrop_type":"reflection","test_time":13.786755084991,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 29 [batchSize = 64]	
+{
+  epoch : 29
+  test_acc : 56.63
+  loss : 1.1057934151264
+  train_acc : 67.811699743918
+  lr : 0.072324555652948
+  train_time : 207.86198592186
+  test_time : 13.778589963913
+  n_parameters : 23874564
+  train_loss : 1.1057934151264
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.072324555652948
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.1057934151264,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":56.63,"init_value":10,"train_acc":67.811699743918,"sequences":2,"epoch_step":1,"train_time":207.86198592186,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":29,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.072324555652948,"generate_graph":false,"learningRate":0.072324555652948,"train_loss":1.1057934151264,"randomcrop_type":"reflection","test_time":13.778589963913,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 30 [batchSize = 64]	
+{
+  epoch : 30
+  test_acc : 46.77
+  loss : 1.0730407097581
+  train_acc : 68.786011523688
+  lr : 0.071493634652071
+  train_time : 207.7394220829
+  test_time : 13.676775217056
+  n_parameters : 23874564
+  train_loss : 1.0730407097581
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.071493634652071
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0730407097581,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":46.77,"init_value":10,"train_acc":68.786011523688,"sequences":2,"epoch_step":1,"train_time":207.7394220829,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":30,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.071493634652071,"generate_graph":false,"learningRate":0.071493634652071,"train_loss":1.0730407097581,"randomcrop_type":"reflection","test_time":13.676775217056,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 31 [batchSize = 64]	
+{
+  epoch : 31
+  test_acc : 61.11
+  loss : 1.2025562644615
+  train_acc : 65.380921895006
+  lr : 0.070670191940203
+  train_time : 208.05656719208
+  test_time : 13.83443903923
+  n_parameters : 23874564
+  train_loss : 1.2025562644615
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.070670191940203
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.2025562644615,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":61.11,"init_value":10,"train_acc":65.380921895006,"sequences":2,"epoch_step":1,"train_time":208.05656719208,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":31,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.070670191940203,"generate_graph":false,"learningRate":0.070670191940203,"train_loss":1.2025562644615,"randomcrop_type":"reflection","test_time":13.83443903923,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 32 [batchSize = 64]	
+{
+  epoch : 32
+  test_acc : 49.46
+  loss : 1.0921516304743
+  train_acc : 68.325864276568
+  lr : 0.069854160212741
+  train_time : 207.75563597679
+  test_time : 13.764070987701
+  n_parameters : 23874564
+  train_loss : 1.0921516304743
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.069854160212741
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0921516304743,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":49.46,"init_value":10,"train_acc":68.325864276568,"sequences":2,"epoch_step":1,"train_time":207.75563597679,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":32,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.069854160212741,"generate_graph":false,"learningRate":0.069854160212741,"train_loss":1.0921516304743,"randomcrop_type":"reflection","test_time":13.764070987701,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 33 [batchSize = 64]	
+{
+  epoch : 33
+  test_acc : 52.87
+  loss : 1.0370581526304
+  train_acc : 70.050416133163
+  lr : 0.069045472770826
+  train_time : 207.91602611542
+  test_time : 13.790051937103
+  n_parameters : 23874564
+  train_loss : 1.0370581526304
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.069045472770826
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0370581526304,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":52.87,"init_value":10,"train_acc":70.050416133163,"sequences":2,"epoch_step":1,"train_time":207.91602611542,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":33,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.069045472770826,"generate_graph":false,"learningRate":0.069045472770826,"train_loss":1.0370581526304,"randomcrop_type":"reflection","test_time":13.790051937103,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 34 [batchSize = 64]	
+{
+  epoch : 34
+  test_acc : 59.52
+  loss : 1.1685216466535
+  train_acc : 66.245198463508
+  lr : 0.068244063515889
+  train_time : 207.94972300529
+  test_time : 13.755528926849
+  n_parameters : 23874564
+  train_loss : 1.1685216466535
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.068244063515889
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.1685216466535,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":59.52,"init_value":10,"train_acc":66.245198463508,"sequences":2,"epoch_step":1,"train_time":207.94972300529,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":34,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.068244063515889,"generate_graph":false,"learningRate":0.068244063515889,"train_loss":1.1685216466535,"randomcrop_type":"reflection","test_time":13.755528926849,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 35 [batchSize = 64]	
+{
+  epoch : 35
+  test_acc : 52.94
+  loss : 1.0662122607689
+  train_acc : 68.794014084507
+  lr : 0.067449866944246
+  train_time : 207.60891795158
+  test_time : 13.774136066437
+  n_parameters : 23874564
+  train_loss : 1.0662122607689
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.067449866944246
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0662122607689,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":52.94,"init_value":10,"train_acc":68.794014084507,"sequences":2,"epoch_step":1,"train_time":207.60891795158,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":35,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.067449866944246,"generate_graph":false,"learningRate":0.067449866944246,"train_loss":1.0662122607689,"randomcrop_type":"reflection","test_time":13.774136066437,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 36 [batchSize = 64]	
+{
+  epoch : 36
+  test_acc : 57.13
+  loss : 1.022926051928
+  train_acc : 70.070422535211
+  lr : 0.066662818141747
+  train_time : 207.86783289909
+  test_time : 13.77824306488
+  n_parameters : 23874564
+  train_loss : 1.022926051928
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.066662818141747
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.022926051928,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":57.13,"init_value":10,"train_acc":70.070422535211,"sequences":2,"epoch_step":1,"train_time":207.86783289909,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":36,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.066662818141747,"generate_graph":false,"learningRate":0.066662818141747,"train_loss":1.022926051928,"randomcrop_type":"reflection","test_time":13.77824306488,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 37 [batchSize = 64]	
+{
+  epoch : 37
+  test_acc : 56.13
+  loss : 1.1125316596978
+  train_acc : 68.061779769526
+  lr : 0.065882852778472
+  train_time : 207.98126196861
+  test_time : 13.77861905098
+  n_parameters : 23874564
+  train_loss : 1.1125316596978
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.065882852778472
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.1125316596978,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":56.13,"init_value":10,"train_acc":68.061779769526,"sequences":2,"epoch_step":1,"train_time":207.98126196861,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":37,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.065882852778472,"generate_graph":false,"learningRate":0.065882852778472,"train_loss":1.1125316596978,"randomcrop_type":"reflection","test_time":13.77861905098,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 38 [batchSize = 64]	
+{
+  epoch : 38
+  test_acc : 57.07
+  loss : 1.0452759716941
+  train_acc : 69.536251600512
+  lr : 0.065109907103465
+  train_time : 207.87633109093
+  test_time : 13.775797128677
+  n_parameters : 23874564
+  train_loss : 1.0452759716941
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.065109907103465
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0452759716941,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":57.07,"init_value":10,"train_acc":69.536251600512,"sequences":2,"epoch_step":1,"train_time":207.87633109093,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":38,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.065109907103465,"generate_graph":false,"learningRate":0.065109907103465,"train_loss":1.0452759716941,"randomcrop_type":"reflection","test_time":13.775797128677,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 39 [batchSize = 64]	
+{
+  epoch : 39
+  test_acc : 50.1
+  loss : 1.0626828561366
+  train_acc : 69.216149167734
+  lr : 0.064343917939534
+  train_time : 207.45500183105
+  test_time : 13.773360013962
+  n_parameters : 23874564
+  train_loss : 1.0626828561366
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.064343917939534
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0626828561366,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":50.1,"init_value":10,"train_acc":69.216149167734,"sequences":2,"epoch_step":1,"train_time":207.45500183105,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":39,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.064343917939534,"generate_graph":false,"learningRate":0.064343917939534,"train_loss":1.0626828561366,"randomcrop_type":"reflection","test_time":13.773360013962,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 40 [batchSize = 64]	
+{
+  epoch : 40
+  test_acc : 55.07
+  loss : 0.98982998259394
+  train_acc : 71.058738796415
+  lr : 0.063584822678079
+  train_time : 207.60803508759
+  test_time : 13.747112035751
+  n_parameters : 23874564
+  train_loss : 0.98982998259394
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.063584822678079
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.98982998259394,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":55.07,"init_value":10,"train_acc":71.058738796415,"sequences":2,"epoch_step":1,"train_time":207.60803508759,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":40,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.063584822678079,"generate_graph":false,"learningRate":0.063584822678079,"train_loss":0.98982998259394,"randomcrop_type":"reflection","test_time":13.747112035751,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 41 [batchSize = 64]	
+{
+  epoch : 41
+  test_acc : 59.45
+  loss : 1.0690873920841
+  train_acc : 68.910051216389
+  lr : 0.062832559273976
+  train_time : 207.663408041
+  test_time : 13.78196811676
+  n_parameters : 23874564
+  train_loss : 1.0690873920841
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.062832559273976
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0690873920841,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":59.45,"init_value":10,"train_acc":68.910051216389,"sequences":2,"epoch_step":1,"train_time":207.663408041,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":41,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.062832559273976,"generate_graph":false,"learningRate":0.062832559273976,"train_loss":1.0690873920841,"randomcrop_type":"reflection","test_time":13.78196811676,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 42 [batchSize = 64]	
+{
+  epoch : 42
+  test_acc : 58.06
+  loss : 1.0011359044898
+  train_acc : 70.798655569782
+  lr : 0.06208706624051
+  train_time : 207.68643498421
+  test_time : 13.785572052002
+  n_parameters : 23874564
+  train_loss : 1.0011359044898
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.06208706624051
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0011359044898,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":58.06,"init_value":10,"train_acc":70.798655569782,"sequences":2,"epoch_step":1,"train_time":207.68643498421,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":42,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.06208706624051,"generate_graph":false,"learningRate":0.06208706624051,"train_loss":1.0011359044898,"randomcrop_type":"reflection","test_time":13.785572052002,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 43 [batchSize = 64]	
+{
+  epoch : 43
+  test_acc : 56.49
+  loss : 0.93602697217358
+  train_acc : 72.603233034571
+  lr : 0.061348282644345
+  train_time : 207.49339318275
+  test_time : 13.737520933151
+  n_parameters : 23874564
+  train_loss : 0.93602697217358
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.061348282644345
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.93602697217358,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":56.49,"init_value":10,"train_acc":72.603233034571,"sequences":2,"epoch_step":1,"train_time":207.49339318275,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":43,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.061348282644345,"generate_graph":false,"learningRate":0.061348282644345,"train_loss":0.93602697217358,"randomcrop_type":"reflection","test_time":13.737520933151,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 44 [batchSize = 64]	
+{
+  epoch : 44
+  test_acc : 53.73
+  loss : 0.90717056305857
+  train_acc : 73.497519206146
+  lr : 0.060616148100546
+  train_time : 211.26049089432
+  test_time : 14.684086084366
+  n_parameters : 23874564
+  train_loss : 0.90717056305857
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.060616148100546
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.90717056305857,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":53.73,"init_value":10,"train_acc":73.497519206146,"sequences":2,"epoch_step":1,"train_time":211.26049089432,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":44,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.060616148100546,"generate_graph":false,"learningRate":0.060616148100546,"train_loss":0.90717056305857,"randomcrop_type":"reflection","test_time":14.684086084366,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 45 [batchSize = 64]	
+{
+  epoch : 45
+  test_acc : 56.05
+  loss : 0.88059649356043
+  train_acc : 74.129721510883
+  lr : 0.059890602767641
+  train_time : 211.74241399765
+  test_time : 13.820437908173
+  n_parameters : 23874564
+  train_loss : 0.88059649356043
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.059890602767641
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.88059649356043,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":56.05,"init_value":10,"train_acc":74.129721510883,"sequences":2,"epoch_step":1,"train_time":211.74241399765,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":45,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.059890602767641,"generate_graph":false,"learningRate":0.059890602767641,"train_loss":0.88059649356043,"randomcrop_type":"reflection","test_time":13.820437908173,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 46 [batchSize = 64]	
+{
+  epoch : 46
+  test_acc : 58.57
+  loss : 0.85026569933501
+  train_acc : 74.667893725992
+  lr : 0.059171587342733
+  train_time : 208.360476017
+  test_time : 13.800810098648
+  n_parameters : 23874564
+  train_loss : 0.85026569933501
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.059171587342733
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.85026569933501,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":58.57,"init_value":10,"train_acc":74.667893725992,"sequences":2,"epoch_step":1,"train_time":208.360476017,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":46,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.059171587342733,"generate_graph":false,"learningRate":0.059171587342733,"train_loss":0.85026569933501,"randomcrop_type":"reflection","test_time":13.800810098648,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 47 [batchSize = 64]	
+{
+  epoch : 47
+  test_acc : 50.23
+  loss : 0.83786316381984
+  train_acc : 75.15604993598
+  lr : 0.058459043056648
+  train_time : 208.01946687698
+  test_time : 13.759073019028
+  n_parameters : 23874564
+  train_loss : 0.83786316381984
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.058459043056648
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.83786316381984,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":50.23,"init_value":10,"train_acc":75.15604993598,"sequences":2,"epoch_step":1,"train_time":208.01946687698,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":47,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.058459043056648,"generate_graph":false,"learningRate":0.058459043056648,"train_loss":0.83786316381984,"randomcrop_type":"reflection","test_time":13.759073019028,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 48 [batchSize = 64]	
+{
+  epoch : 48
+  test_acc : 57.22
+  loss : 0.81613076068986
+  train_acc : 75.854273367478
+  lr : 0.057752911669138
+  train_time : 210.26761388779
+  test_time : 14.336989879608
+  n_parameters : 23874564
+  train_loss : 0.81613076068986
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.057752911669138
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.81613076068986,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":57.22,"init_value":10,"train_acc":75.854273367478,"sequences":2,"epoch_step":1,"train_time":210.26761388779,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":48,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.057752911669138,"generate_graph":false,"learningRate":0.057752911669138,"train_loss":0.81613076068986,"randomcrop_type":"reflection","test_time":14.336989879608,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 49 [batchSize = 64]	
+{
+  epoch : 49
+  test_acc : 58.78
+  loss : 0.79540101128717
+  train_acc : 76.302416773367
+  lr : 0.057053135464116
+  train_time : 218.74442505836
+  test_time : 14.536401987076
+  n_parameters : 23874564
+  train_loss : 0.79540101128717
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.057053135464116
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.79540101128717,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":58.78,"init_value":10,"train_acc":76.302416773367,"sequences":2,"epoch_step":1,"train_time":218.74442505836,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":49,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.057053135464116,"generate_graph":false,"learningRate":0.057053135464116,"train_loss":0.79540101128717,"randomcrop_type":"reflection","test_time":14.536401987076,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 50 [batchSize = 64]	
+{
+  epoch : 50
+  test_acc : 58.29
+  loss : 0.78441196947183
+  train_acc : 76.702544814341
+  lr : 0.056359657244939
+  train_time : 243.30525898933
+  test_time : 13.755195856094
+  n_parameters : 23874564
+  train_loss : 0.78441196947183
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.056359657244939
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.78441196947183,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":58.29,"init_value":10,"train_acc":76.702544814341,"sequences":2,"epoch_step":1,"train_time":243.30525898933,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":50,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.056359657244939,"generate_graph":false,"learningRate":0.056359657244939,"train_loss":0.78441196947183,"randomcrop_type":"reflection","test_time":13.755195856094,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 51 [batchSize = 64]	
+{
+  epoch : 51
+  test_acc : 57.43
+  loss : 0.77072042345085
+  train_acc : 77.054657490397
+  lr : 0.055672420329734
+  train_time : 208.32288789749
+  test_time : 13.545531988144
+  n_parameters : 23874564
+  train_loss : 0.77072042345085
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.055672420329734
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":0.77072042345085,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":57.43,"init_value":10,"train_acc":77.054657490397,"sequences":2,"epoch_step":1,"train_time":208.32288789749,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":51,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.055672420329734,"generate_graph":false,"learningRate":0.055672420329734,"train_loss":0.77072042345085,"randomcrop_type":"reflection","test_time":13.545531988144,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 52 [batchSize = 64]	
+{
+  epoch : 52
+  test_acc : 64.76
+  loss : 1.0836775879091
+  train_acc : 68.848031370038
+  lr : 0.054991368546767
+  train_time : 204.07531380653
+  test_time : 13.60638999939
+  n_parameters : 23874564
+  train_loss : 1.0836775879091
+}
+{
+  optnet_optimize : true
+  num_classes : 100
+  generate_graph : false
+  learningRate : 0.054991368546767
+  init_value : 10
+  randomcrop : 4
+  sequences : 2
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRateDecayRatio : 0.991
+  model : "hoard-2-x"
+  save : "logs/hoard-2-x_2442625743"
+  dampening : 0
+  weightDecay : 0.0005
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 2
+  nGPU : 1
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  max_epoch : 1500
+  momentum : 0.9
+  optimMethod : "sgd"
+  widen_factor : 1
+  hflip : true
+  imageSize : 32
+  dropout : 0
+  learningRateDecay : 0.00018
+  data_type : "torch.CudaTensor"
+  batchSize : 64
+}
+json_stats: {"optnet_optimize":true,"loss":1.0836775879091,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"hoard-2-x","nesterov":true,"nGPU":1,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":64.76,"init_value":10,"train_acc":68.848031370038,"sequences":2,"epoch_step":1,"train_time":204.07531380653,"learningRateDecayRatio":0.991,"dampening":0,"learningRateDecay":0.00018,"max_epoch":1500,"epoch":52,"imageSize":32,"depth":2,"hflip":true,"widen_factor":1,"num_classes":100,"save":"logs\/hoard-2-x_2442625743","lr":0.054991368546767,"generate_graph":false,"learningRate":0.054991368546767,"train_loss":1.0836775879091,"randomcrop_type":"reflection","test_time":13.60638999939,"n_parameters":23874564,"cudnn_deterministic":false,"shortcutType":"A"}	
+==> online epoch # 53 [batchSize = 64]	

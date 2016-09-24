@@ -1,0 +1,179 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  init_value : 10
+  randomcrop : 4
+  batchSize : 32
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.1
+  model : "nin-my-grouped-2x2-extended"
+  save : "logs/nin-my-grouped-2x2-extended_2710279"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 40
+  weightDecay : 5e-07
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 4
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+==> loading data	
+==> configuring model	
+forward output	{
+  1 : CudaTensor - size: 1x100
+}
+backward output	{
+  1 : CudaTensor - size: 1x3x32x32
+}
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> (13) -> (14) -> (15) -> (16) -> (17) -> (18) -> (19) -> (20) -> (21) -> (22) -> (23) -> (24) -> (25) -> (26) -> (27) -> (28) -> (29) -> (30) -> (31) -> (32) -> (33) -> (34) -> (35) -> (36) -> (37) -> (38) -> (39) -> (40) -> (41) -> (42) -> (43) -> (44) -> output]
+  (1): cudnn.SpatialConvolution(3 -> 32, 2x2, 1,1, 1,1) without bias
+  (2): cudnn.SpatialBatchNormalization
+  (3): cudnn.ReLU
+  (4): cudnn.SpatialConvolution(32 -> 128, 2x2) without bias
+  (5): cudnn.SpatialBatchNormalization
+  (6): cudnn.ReLU
+  (7): cudnn.SpatialConvolution(128 -> 64, 2x2, 1,1, 1,1) without bias
+  (8): cudnn.SpatialBatchNormalization
+  (9): cudnn.ReLU
+  (10): cudnn.SpatialConvolution(64 -> 256, 2x2) without bias
+  (11): cudnn.SpatialBatchNormalization
+  (12): cudnn.ReLU
+  (13): cudnn.SpatialConvolution(256 -> 128, 1x1) without bias
+  (14): cudnn.SpatialBatchNormalization
+  (15): cudnn.ReLU
+  (16): cudnn.SpatialMaxPooling(3x3, 2,2)
+  (17): cudnn.SpatialConvolution(128 -> 128, 2x2, 1,1, 1,1) without bias
+  (18): cudnn.SpatialBatchNormalization
+  (19): cudnn.ReLU
+  (20): cudnn.SpatialConvolution(128 -> 512, 2x2) without bias
+  (21): cudnn.SpatialBatchNormalization
+  (22): cudnn.ReLU
+  (23): cudnn.SpatialConvolution(512 -> 256, 2x2, 1,1, 1,1) without bias
+  (24): cudnn.SpatialBatchNormalization
+  (25): cudnn.ReLU
+  (26): cudnn.SpatialConvolution(256 -> 512, 2x2) without bias
+  (27): cudnn.SpatialBatchNormalization
+  (28): cudnn.ReLU
+  (29): cudnn.SpatialConvolution(512 -> 256, 1x1) without bias
+  (30): cudnn.SpatialBatchNormalization
+  (31): cudnn.ReLU
+  (32): cudnn.SpatialAveragePooling(3x3, 2,2)
+  (33): cudnn.SpatialConvolution(256 -> 1024, 2x2, 1,1, 1,1) without bias
+  (34): cudnn.SpatialBatchNormalization
+  (35): cudnn.ReLU
+  (36): cudnn.SpatialConvolution(1024 -> 1024, 2x2) without bias
+  (37): cudnn.SpatialBatchNormalization
+  (38): cudnn.ReLU
+  (39): cudnn.SpatialConvolution(1024 -> 1024, 1x1) without bias
+  (40): cudnn.SpatialBatchNormalization
+  (41): cudnn.ReLU
+  (42): cudnn.VolumetricAveragePooling
+  (43): nn.View(-1)
+  (44): nn.Linear(256 -> 100)
+}
+Network has	13	convolutions	
+Will save at logs/nin-my-grouped-2x2-extended_2710279	
+==> online epoch # 1 [batchSize = 32]	
+{
+  epoch : 1
+  test_acc : 20.28
+  loss : 3.7204028577109
+  train_acc : 11.969830345711
+  lr : 0.09885
+  train_time : 56.562390804291
+  test_time : 4.3440790176392
+  n_parameters : 2129828
+  train_loss : 3.7204028577109
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 32
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.09885
+  model : "nin-my-grouped-2x2-extended"
+  save : "logs/nin-my-grouped-2x2-extended_2710279"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 40
+  weightDecay : 5e-07
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 4
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.09885,"randomcrop":4,"batchSize":32,"data_type":"torch.CudaTensor","model":"nin-my-grouped-2x2-extended","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":5e-07,"test_acc":20.28,"init_value":10,"train_acc":11.969830345711,"widen_factor":4,"imageSize":32,"train_time":56.562390804291,"save":"logs\/nin-my-grouped-2x2-extended_2710279","dampening":0,"shortcutType":"A","epoch":1,"nGPU":1,"depth":40,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.09885,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":3.7204028577109,"randomcrop_type":"reflection","test_time":4.3440790176392,"n_parameters":2129828,"epoch_step":1,"loss":3.7204028577109}	
+==> online epoch # 2 [batchSize = 32]	
+{
+  epoch : 2
+  test_acc : 31.03
+  loss : 2.9021007414817
+  train_acc : 25.792253521127
+  lr : 0.0977115
+  train_time : 58.624737024307
+  test_time : 3.8964910507202
+  n_parameters : 2129828
+  train_loss : 2.9021007414817
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 32
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.0977115
+  model : "nin-my-grouped-2x2-extended"
+  save : "logs/nin-my-grouped-2x2-extended_2710279"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 40
+  weightDecay : 5e-07
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 4
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.0977115,"randomcrop":4,"batchSize":32,"data_type":"torch.CudaTensor","model":"nin-my-grouped-2x2-extended","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":5e-07,"test_acc":31.03,"init_value":10,"train_acc":25.792253521127,"widen_factor":4,"imageSize":32,"train_time":58.624737024307,"save":"logs\/nin-my-grouped-2x2-extended_2710279","dampening":0,"shortcutType":"A","epoch":2,"nGPU":1,"depth":40,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.0977115,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":2.9021007414817,"randomcrop_type":"reflection","test_time":3.8964910507202,"n_parameters":2129828,"epoch_step":1,"loss":2.9021007414817}	
+==> online epoch # 3 [batchSize = 32]	

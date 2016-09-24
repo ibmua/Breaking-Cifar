@@ -1,0 +1,47 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.03
+  model : "simple-map"
+  save : "logs/simple-map_2262529557"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 50
+  weightDecay : 5e-07
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_whitened.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 1
+  hflip : true
+  dropout : 0
+  learningRateDecay : 5e-05
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+==> loading data	
+==> configuring model	
+forward output	{
+  1 : FloatTensor - size: 1x100
+}
+backward output	{
+  1 : FloatTensor - size: 1x3x32x32
+}
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> output]
+  (1): nn.SpatialConvolutionMap
+  (2): cudnn.SpatialAveragePooling(30x30, 1,1)
+  (3): nn.View(-1)
+  (4): nn.Linear(24 -> 100)
+}
+Network has	0	convolutions	

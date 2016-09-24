@@ -1,0 +1,129 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  init_value : 10
+  randomcrop : 4
+  batchSize : 128
+  epoch_step : 
+    {
+      1 : 6
+      2 : 15
+      3 : 30
+    }
+  randomcrop_type : "reflection"
+  learningRate : 0.07
+  model : "my-nin-2-based-1"
+  save : "logs/my-nin-2-based-1_2224323531"
+  dampening : 0
+  learningRateDecayRatio : 0.4
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 50
+  weightDecay : 0.0005
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_whitened.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 200
+  widen_factor : 1
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+==> loading data	
+==> configuring model	
+forward output	{
+  1 : CudaTensor - size: 1x100
+}
+backward output	{
+  1 : CudaTensor - size: 1x3x32x32
+}
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> (13) -> (14) -> (15) -> (16) -> (17) -> (18) -> (19) -> (20) -> (21) -> (22) -> (23) -> (24) -> (25) -> (26) -> (27) -> (28) -> (29) -> output]
+  (1): cudnn.SpatialConvolution(3 -> 192, 5x5, 1,1, 2,2) without bias
+  (2): cudnn.SpatialBatchNormalization
+  (3): nn.ELU (alpha:1.000000)
+  (4): cudnn.SpatialConvolution(192 -> 768, 1x1) without bias
+  (5): cudnn.SpatialBatchNormalization
+  (6): nn.ELU (alpha:1.000000)
+  (7): cudnn.SpatialMaxPooling(3x3, 2,2)
+  (8): cudnn.SpatialConvolution(768 -> 6144, 5x5, 1,1, 2,2) without bias
+  (9): cudnn.SpatialBatchNormalization
+  (10): nn.ELU (alpha:1.000000)
+  (11): cudnn.SpatialConvolution(6144 -> 192, 1x1) without bias
+  (12): cudnn.SpatialBatchNormalization
+  (13): nn.ELU (alpha:1.000000)
+  (14): cudnn.SpatialConvolution(192 -> 192, 1x1) without bias
+  (15): cudnn.SpatialBatchNormalization
+  (16): nn.ELU (alpha:1.000000)
+  (17): cudnn.SpatialAveragePooling(3x3, 2,2)
+  (18): cudnn.SpatialConvolution(192 -> 1536, 3x3, 1,1, 1,1) without bias
+  (19): cudnn.SpatialBatchNormalization
+  (20): nn.ELU (alpha:1.000000)
+  (21): cudnn.SpatialConvolution(1536 -> 1536, 1x1) without bias
+  (22): cudnn.SpatialBatchNormalization
+  (23): nn.ELU (alpha:1.000000)
+  (24): cudnn.SpatialConvolution(1536 -> 192, 1x1) without bias
+  (25): cudnn.SpatialBatchNormalization
+  (26): nn.ELU (alpha:1.000000)
+  (27): cudnn.SpatialAveragePooling(8x8, 1,1)
+  (28): nn.View(-1)
+  (29): nn.Linear(192 -> 100)
+}
+Network has	8	convolutions	
+Will save at logs/my-nin-2-based-1_2224323531	
+==> online epoch # 1 [batchSize = 128]	
+{
+  epoch : 1
+  test_acc : 19.22
+  loss : 3.4528459500044
+  train_acc : 17.732371794872
+  lr : 0.07
+  train_time : 198.45311903954
+  test_time : 9.7964849472046
+  n_parameters : 565540
+  train_loss : 3.4528459500044
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 128
+  epoch_step : 
+    {
+      1 : 6
+      2 : 15
+      3 : 30
+    }
+  randomcrop_type : "reflection"
+  learningRate : 0.07
+  model : "my-nin-2-based-1"
+  save : "logs/my-nin-2-based-1_2224323531"
+  dampening : 0
+  learningRateDecayRatio : 0.4
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 50
+  weightDecay : 0.0005
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_whitened.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 200
+  widen_factor : 1
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.07,"randomcrop":4,"batchSize":128,"data_type":"torch.CudaTensor","model":"my-nin-2-based-1","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_whitened.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0005,"test_acc":19.22,"init_value":10,"train_acc":17.732371794872,"widen_factor":1,"imageSize":32,"train_time":198.45311903954,"save":"logs\/my-nin-2-based-1_2224323531","dampening":0,"shortcutType":"A","epoch":1,"nGPU":1,"depth":50,"learningRateDecay":0,"hflip":true,"max_epoch":200,"num_classes":100,"lr":0.07,"learningRateDecayRatio":0.4,"generate_graph":false,"train_loss":3.4528459500044,"randomcrop_type":"reflection","test_time":9.7964849472046,"n_parameters":565540,"epoch_step":[6,15,30],"loss":3.4528459500044}	
+==> online epoch # 2 [batchSize = 128]	

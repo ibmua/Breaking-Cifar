@@ -1,0 +1,428 @@
+{
+  optnet_optimize : true
+  generate_graph : false
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.1
+  model : "wide-res-restructured-dot-8g-33"
+  save : "logs/wide-res-restructured-dot-8g-33_2480418496"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 52
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+==> loading data	
+==> configuring model	
+16	32	1	1	1	1	0	0	1	
+32	512	3	3	1	1	1	1	16	
+512	1024	3	3	1	1	1	1	16	
+1024	512	1	1	1	1	0	0	8	
+512	32	1	1	1	1	0	0	1	
+32	64	1	1	1	1	0	0	1	
+64	1024	3	3	2	2	1	1	16	
+1024	2048	3	3	1	1	1	1	16	
+2048	1024	1	1	1	1	0	0	8	
+1024	64	1	1	1	1	0	0	1	
+64	128	1	1	1	1	0	0	1	
+128	2048	3	3	2	2	1	1	8	
+2048	4096	3	3	1	1	1	1	8	
+4096	2048	1	1	1	1	0	0	8	
+2048	128	1	1	1	1	0	0	1	
+forward output	{
+  1 : CudaTensor - size: 1x100
+}
+backward output	{
+  1 : CudaTensor - size: 1x3x32x32
+}
+nn.Sequential {
+  [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> output]
+  (1): cudnn.SpatialConvolution(3 -> 16, 3x3, 1,1, 1,1) without bias
+  (2): nn.Sequential {
+    [input -> (1) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> (3) -> (4) -> output]
+      (1): cudnn.SpatialBatchNormalization
+      (2): cudnn.ReLU
+      (3): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> (13) -> output]
+          |      (1): cudnn.SpatialConvolution(16 -> 32, 1x1) without bias
+          |      (2): cudnn.SpatialBatchNormalization
+          |      (3): cudnn.ReLU
+          |      (4): cudnn.SpatialConvolution(32 -> 512, 3x3, 1,1, 1,1) without bias
+          |      (5): cudnn.SpatialBatchNormalization
+          |      (6): cudnn.ReLU
+          |      (7): cudnn.SpatialConvolution(512 -> 1024, 3x3, 1,1, 1,1) without bias
+          |      (8): cudnn.SpatialBatchNormalization
+          |      (9): cudnn.ReLU
+          |      (10): cudnn.SpatialConvolution(1024 -> 512, 1x1) without bias
+          |      (11): cudnn.SpatialBatchNormalization
+          |      (12): cudnn.ReLU
+          |      (13): cudnn.SpatialConvolution(512 -> 32, 1x1) without bias
+          |    }
+          |`-> (2): cudnn.SpatialConvolution(16 -> 32, 1x1) without bias
+           ... -> output
+      }
+      (4): nn.CMulTable
+    }
+  }
+  (3): nn.Sequential {
+    [input -> (1) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> (3) -> (4) -> output]
+      (1): cudnn.SpatialBatchNormalization
+      (2): cudnn.ReLU
+      (3): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> (13) -> (14) -> output]
+          |      (1): cudnn.SpatialConvolution(32 -> 64, 1x1) without bias
+          |      (2): cudnn.SpatialBatchNormalization
+          |      (3): cudnn.ReLU
+          |      (4): cudnn.SpatialConvolution(64 -> 1024, 3x3, 1,1, 1,1) without bias
+          |      (5): cudnn.SpatialMaxPooling(2x2, 2,2)
+          |      (6): cudnn.SpatialBatchNormalization
+          |      (7): cudnn.ReLU
+          |      (8): cudnn.SpatialConvolution(1024 -> 2048, 3x3, 1,1, 1,1) without bias
+          |      (9): cudnn.SpatialBatchNormalization
+          |      (10): cudnn.ReLU
+          |      (11): cudnn.SpatialConvolution(2048 -> 1024, 1x1) without bias
+          |      (12): cudnn.SpatialBatchNormalization
+          |      (13): cudnn.ReLU
+          |      (14): cudnn.SpatialConvolution(1024 -> 64, 1x1) without bias
+          |    }
+          |`-> (2): cudnn.SpatialConvolution(32 -> 64, 1x1, 2,2) without bias
+           ... -> output
+      }
+      (4): nn.CMulTable
+    }
+  }
+  (4): nn.Sequential {
+    [input -> (1) -> output]
+    (1): nn.Sequential {
+      [input -> (1) -> (2) -> (3) -> (4) -> output]
+      (1): cudnn.SpatialBatchNormalization
+      (2): cudnn.ReLU
+      (3): nn.ConcatTable {
+        input
+          |`-> (1): nn.Sequential {
+          |      [input -> (1) -> (2) -> (3) -> (4) -> (5) -> (6) -> (7) -> (8) -> (9) -> (10) -> (11) -> (12) -> (13) -> (14) -> output]
+          |      (1): cudnn.SpatialConvolution(64 -> 128, 1x1) without bias
+          |      (2): cudnn.SpatialBatchNormalization
+          |      (3): cudnn.ReLU
+          |      (4): cudnn.SpatialConvolution(128 -> 2048, 3x3, 1,1, 1,1) without bias
+          |      (5): cudnn.SpatialMaxPooling(2x2, 2,2)
+          |      (6): cudnn.SpatialBatchNormalization
+          |      (7): cudnn.ReLU
+          |      (8): cudnn.SpatialConvolution(2048 -> 4096, 3x3, 1,1, 1,1) without bias
+          |      (9): cudnn.SpatialBatchNormalization
+          |      (10): cudnn.ReLU
+          |      (11): cudnn.SpatialConvolution(4096 -> 2048, 1x1) without bias
+          |      (12): cudnn.SpatialBatchNormalization
+          |      (13): cudnn.ReLU
+          |      (14): cudnn.SpatialConvolution(2048 -> 128, 1x1) without bias
+          |    }
+          |`-> (2): cudnn.SpatialConvolution(64 -> 128, 1x1, 2,2) without bias
+           ... -> output
+      }
+      (4): nn.CMulTable
+    }
+  }
+  (5): cudnn.SpatialBatchNormalization
+  (6): cudnn.ReLU
+  (7): cudnn.SpatialAveragePooling(8x8, 1,1)
+  (8): nn.View(128)
+  (9): nn.Linear(128 -> 100)
+}
+Network has	19	convolutions	
+Will save at logs/wide-res-restructured-dot-8g-33_2480418496	
+==> online epoch # 1 [batchSize = 64]	
+{
+  epoch : 1
+  test_acc : 17.39
+  loss : 3.9629055421881
+  train_acc : 8.9748719590269
+  lr : 0.09885
+  train_time : 152.38080596924
+  test_time : 9.628103017807
+  n_parameters : 13037492
+  train_loss : 3.9629055421881
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.09885
+  model : "wide-res-restructured-dot-8g-33"
+  save : "logs/wide-res-restructured-dot-8g-33_2480418496"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 52
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.09885,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"wide-res-restructured-dot-8g-33","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0003,"test_acc":17.39,"init_value":10,"train_acc":8.9748719590269,"widen_factor":2,"imageSize":32,"train_time":152.38080596924,"save":"logs\/wide-res-restructured-dot-8g-33_2480418496","dampening":0,"shortcutType":"A","epoch":1,"nGPU":1,"depth":52,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.09885,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":3.9629055421881,"randomcrop_type":"reflection","test_time":9.628103017807,"n_parameters":13037492,"epoch_step":1,"loss":3.9629055421881}	
+==> online epoch # 2 [batchSize = 64]	
+{
+  epoch : 2
+  test_acc : 27.09
+  loss : 2.9037739934445
+  train_acc : 25.762243918054
+  lr : 0.0977115
+  train_time : 153.04438900948
+  test_time : 9.3003869056702
+  n_parameters : 13037492
+  train_loss : 2.9037739934445
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.0977115
+  model : "wide-res-restructured-dot-8g-33"
+  save : "logs/wide-res-restructured-dot-8g-33_2480418496"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 52
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.0977115,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"wide-res-restructured-dot-8g-33","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0003,"test_acc":27.09,"init_value":10,"train_acc":25.762243918054,"widen_factor":2,"imageSize":32,"train_time":153.04438900948,"save":"logs\/wide-res-restructured-dot-8g-33_2480418496","dampening":0,"shortcutType":"A","epoch":2,"nGPU":1,"depth":52,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.0977115,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":2.9037739934445,"randomcrop_type":"reflection","test_time":9.3003869056702,"n_parameters":13037492,"epoch_step":1,"loss":2.9037739934445}	
+==> online epoch # 3 [batchSize = 64]	
+{
+  epoch : 3
+  test_acc : 38.08
+  loss : 2.3116573141113
+  train_acc : 38.192221510883
+  lr : 0.096584385
+  train_time : 154.55336117744
+  test_time : 9.3485178947449
+  n_parameters : 13037492
+  train_loss : 2.3116573141113
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.096584385
+  model : "wide-res-restructured-dot-8g-33"
+  save : "logs/wide-res-restructured-dot-8g-33_2480418496"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 52
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.096584385,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"wide-res-restructured-dot-8g-33","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0003,"test_acc":38.08,"init_value":10,"train_acc":38.192221510883,"widen_factor":2,"imageSize":32,"train_time":154.55336117744,"save":"logs\/wide-res-restructured-dot-8g-33_2480418496","dampening":0,"shortcutType":"A","epoch":3,"nGPU":1,"depth":52,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.096584385,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":2.3116573141113,"randomcrop_type":"reflection","test_time":9.3485178947449,"n_parameters":13037492,"epoch_step":1,"loss":2.3116573141113}	
+==> online epoch # 4 [batchSize = 64]	
+{
+  epoch : 4
+  test_acc : 43.04
+  loss : 2.0544120955559
+  train_acc : 43.876040332907
+  lr : 0.09546854115
+  train_time : 152.99979805946
+  test_time : 9.3008391857147
+  n_parameters : 13037492
+  train_loss : 2.0544120955559
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.09546854115
+  model : "wide-res-restructured-dot-8g-33"
+  save : "logs/wide-res-restructured-dot-8g-33_2480418496"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 52
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.09546854115,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"wide-res-restructured-dot-8g-33","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0003,"test_acc":43.04,"init_value":10,"train_acc":43.876040332907,"widen_factor":2,"imageSize":32,"train_time":152.99979805946,"save":"logs\/wide-res-restructured-dot-8g-33_2480418496","dampening":0,"shortcutType":"A","epoch":4,"nGPU":1,"depth":52,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.09546854115,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":2.0544120955559,"randomcrop_type":"reflection","test_time":9.3008391857147,"n_parameters":13037492,"epoch_step":1,"loss":2.0544120955559}	
+==> online epoch # 5 [batchSize = 64]	
+{
+  epoch : 5
+  test_acc : 42.33
+  loss : 1.8637373807641
+  train_acc : 48.717589628681
+  lr : 0.0943638557385
+  train_time : 153.06031799316
+  test_time : 9.6181302070618
+  n_parameters : 13037492
+  train_loss : 1.8637373807641
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.0943638557385
+  model : "wide-res-restructured-dot-8g-33"
+  save : "logs/wide-res-restructured-dot-8g-33_2480418496"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 52
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.0943638557385,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"wide-res-restructured-dot-8g-33","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0003,"test_acc":42.33,"init_value":10,"train_acc":48.717589628681,"widen_factor":2,"imageSize":32,"train_time":153.06031799316,"save":"logs\/wide-res-restructured-dot-8g-33_2480418496","dampening":0,"shortcutType":"A","epoch":5,"nGPU":1,"depth":52,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.0943638557385,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":1.8637373807641,"randomcrop_type":"reflection","test_time":9.6181302070618,"n_parameters":13037492,"epoch_step":1,"loss":1.8637373807641}	
+==> online epoch # 6 [batchSize = 64]	
+{
+  epoch : 6
+  test_acc : 44.42
+  loss : 1.7117321158493
+  train_acc : 52.422775288092
+  lr : 0.093270217181115
+  train_time : 156.96559715271
+  test_time : 9.2501890659332
+  n_parameters : 13037492
+  train_loss : 1.7117321158493
+}
+{
+  optnet_optimize : true
+  generate_graph : false
+  num_classes : 100
+  init_value : 10
+  randomcrop : 4
+  batchSize : 64
+  epoch_step : 1
+  randomcrop_type : "reflection"
+  learningRate : 0.093270217181115
+  model : "wide-res-restructured-dot-8g-33"
+  save : "logs/wide-res-restructured-dot-8g-33_2480418496"
+  dampening : 0
+  learningRateDecayRatio : 0.99
+  shortcutType : "A"
+  nesterov : true
+  cudnn_deterministic : false
+  depth : 52
+  weightDecay : 0.0003
+  multiply_input_factor : 1
+  dataset : "./datasets/cifar100_combined.t7"
+  imageSize : 32
+  momentum : 0.9
+  optimMethod : "sgd"
+  max_epoch : 1500
+  widen_factor : 2
+  hflip : true
+  dropout : 0
+  learningRateDecay : 0.00015
+  nGPU : 1
+  data_type : "torch.CudaTensor"
+}
+json_stats: {"optnet_optimize":true,"learningRate":0.093270217181115,"randomcrop":4,"batchSize":64,"data_type":"torch.CudaTensor","model":"wide-res-restructured-dot-8g-33","nesterov":true,"cudnn_deterministic":false,"multiply_input_factor":1,"dataset":".\/datasets\/cifar100_combined.t7","momentum":0.9,"optimMethod":"sgd","dropout":0,"weightDecay":0.0003,"test_acc":44.42,"init_value":10,"train_acc":52.422775288092,"widen_factor":2,"imageSize":32,"train_time":156.96559715271,"save":"logs\/wide-res-restructured-dot-8g-33_2480418496","dampening":0,"shortcutType":"A","epoch":6,"nGPU":1,"depth":52,"learningRateDecay":0.00015,"hflip":true,"max_epoch":1500,"num_classes":100,"lr":0.093270217181115,"learningRateDecayRatio":0.99,"generate_graph":false,"train_loss":1.7117321158493,"randomcrop_type":"reflection","test_time":9.2501890659332,"n_parameters":13037492,"epoch_step":1,"loss":1.7117321158493}	
+==> online epoch # 7 [batchSize = 64]	
