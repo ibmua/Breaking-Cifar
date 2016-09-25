@@ -3,4 +3,4 @@ Tests and tries. Experiments I've ran with a modified code from here https://git
 
 If you'll notice any bugs, please, let know.
 
-One "bug" known by now is using the raw dataset without adjusting mean and deviations. Should get even better results if those are adjusted.
+One "bug" known by now is use of the raw dataset without adjusting mean and deviations. Should get even better results if those are adjusted.
