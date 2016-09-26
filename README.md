@@ -34,5 +34,5 @@ function prepare( d , result )
 prepare( cifar10.trainData.data , cifar10.testData.data  )
 prepare( cifar10.trainData.data , cifar10.trainData.data )
 
-torch.save("./datasets/cifar10_std.t7", cifar10)
+torch.save("./datasets/cifar10_mean_std.t7", cifar10)
 ```
