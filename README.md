@@ -7,7 +7,7 @@ One "bug" known by now is use of the raw dataset without adjusting mean and devi
 
 
 ```
-cifar10 = torch.load("./datasets/cifar10.t7")
+cifar = torch.load("./datasets/cifar.t7")
 
 function prepare( d , result )
     m = torch.mean( torch.reshape(d , (#d)[1], 3,32*32), 3)
@@ -31,8 +31,8 @@ function prepare( d , result )
         end
     end
 
-prepare( cifar10.trainData.data , cifar10.testData.data  )
-prepare( cifar10.trainData.data , cifar10.trainData.data )
+prepare( cifar.trainData.data , cifar.testData.data  )
+prepare( cifar.trainData.data , cifar.trainData.data )
 
-torch.save("./datasets/cifar10_mean_std.t7", cifar10)
+torch.save("./datasets/cifar_mean_std.t7", cifar)
 ```
