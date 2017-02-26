@@ -1,5 +1,5 @@
 # Update
-This is how I tried to discover what was later published by Facebook FAIR team of Kaiming He and co. in an update to their state-of-the-art ResNet architecture https://arxiv.org/pdf/1611.05431.pdf . I failed for a couple of reasons, like lack of computational resources (posessing only 2 GPUs) and not coming up with an idea of anything like the Kaiming did with summation which potentially allows to overcome the need for huge memory occupation and throughput.
+This is how I tried to discover what was later published by Facebook FAIR team of Kaiming He and co. in an update to their state-of-the-art ResNet architecture https://arxiv.org/pdf/1611.05431.pdf . 
 
 # Breaking-Cifar
 Tests and tries. Experiments I've ran with a modified code from here https://github.com/szagoruyko/wide-residual-networks. Best result so far ~18.3% error on Cifar-100. Which might be just about the best result so far overall. ᕙ(^▿^-ᕙ) That model uses 80m parameters. Uses plain Relu, so it's likely it can easily be improved by using some smarter activation function (and, possibly, other appropriate initialization). View `notebooks/visualize.ipynb` to find how the trainings went.
